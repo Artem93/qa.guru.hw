@@ -8,7 +8,7 @@ public class SearchTest {
     @Test
     void successfulSearchTest() {
         open("https://www.google.com/");
-        $("[name=q]").setValue("qa.guru").pressEnter();
-        $("[id=search]").shouldHave(text("qa.guru"));
+        $("[name=q]").setValue("conflict").pressEnter();
+        $("[id=search]").shouldHave(text("conflict"));
     }
 }
