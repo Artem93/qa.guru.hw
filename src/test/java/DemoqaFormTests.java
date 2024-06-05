@@ -21,73 +21,56 @@ public class DemoqaFormTests {
     @Test
     void checkFormSubmit() {
         open("/automation-practice-form");
-        final var firstName = "Artem";
-        final var lastName = "L";
-        final var email = "a@mail.com";
-        final var gender = "Male";
-        final var hobbies = "Music";
-        final var number = "8005553535";
-        final var dateOfBirth = new String[]{"January", "1900", "1"};
-        final var subjects = "Computer Science";
-        final var fileName = "test.jpg";
-        final var fileNamePath = "src/test/resources/" + fileName;
-        final var address = "Russia";
-        final var state = "Rajasthan";
-        final var city = "Jaipur";
-
         SelenideElement form = $("#userForm");
 
         SelenideElement userNameWrapper = form.$("#userName-wrapper");
-        userNameWrapper.$("#firstName").setValue(firstName);
-        userNameWrapper.$("#lastName").setValue(lastName);
+        userNameWrapper.$("#firstName").setValue("Artem");
+        userNameWrapper.$("#lastName").setValue("L");
 
-        form.$("#userEmail-wrapper").$("#userEmail").setValue(email);
-        form.$("#genterWrapper").$(byText(gender)).click();
-        form.$("#userNumber-wrapper").$("#userNumber").setValue(number);
+        form.$("#userEmail-wrapper").$("#userEmail").setValue("a@mail.com");
+        form.$("#genterWrapper").$(byText("Male")).click();
+        form.$("#userNumber-wrapper").$("#userNumber").setValue("8005553535");
 
         SelenideElement dateWrapper = form.$("#dateOfBirth-wrapper");
         dateWrapper.$("#dateOfBirthInput").click();
         dateWrapper.$("#dateOfBirth")
-                .$(".react-datepicker__month-select").selectOption(dateOfBirth[0]);
+                .$(".react-datepicker__month-select").selectOption("January");
         dateWrapper.$("#dateOfBirth")
-                .$(".react-datepicker__year-select").selectOption(dateOfBirth[1]);
+                .$(".react-datepicker__year-select").selectOption("1900");
         dateWrapper.$("#dateOfBirth")
-                .$(".react-datepicker__month").find(byText(dateOfBirth[2])).click();
+                .$(".react-datepicker__month").find(byText("1")).click();
 
         form.$("#subjectsWrapper").$("#subjectsInput")
-                .setValue(subjects)
+                .setValue("Computer Science")
                 .pressEnter();
 
-        form.$("#hobbiesWrapper").find(byText(hobbies)).click();
-        form.$("#uploadPicture").uploadFile(new File(fileNamePath));
-        form.$("#currentAddress-wrapper").$("#currentAddress").setValue(address);
+        form.$("#hobbiesWrapper").find(byText("Music")).click();
+        form.$("#uploadPicture").uploadFile(new File("src/test/resources/test.jpg"));
+        form.$("#currentAddress-wrapper").$("#currentAddress").setValue("Russia");
 
         SelenideElement stateCityWrapper = form.$("#stateCity-wrapper");
         stateCityWrapper.$("#state").click();
-        stateCityWrapper.find(byText(state)).click();
+        stateCityWrapper.find(byText("Rajasthan")).click();
         stateCityWrapper.$("#city").click();
-        stateCityWrapper.find(byText(city)).click();
+        stateCityWrapper.find(byText("Jaipur")).click();
 
         form.$("#submit").click();
-
 
         SelenideElement modalWindow = $(".modal-dialog");
         modalWindow.$("#example-modal-sizes-title-lg")
                 .shouldBe(visible)
                 .shouldHave(text("Thanks for submitting the form"));
         modalWindow.$(".table-responsive")
-                .shouldHave(text(String.format("Student Name %s %s", firstName, lastName)))
-                .shouldHave(text(String.format("Student Email %s", email)))
-                .shouldHave(text(String.format("Gender %s", gender)))
-                .shouldHave(text(String.format("Mobile %s", number)))
-                .shouldHave(text(String.format("Date of Birth %s %s,%s",
-                        Integer.parseInt(dateOfBirth[2]) > 9 ? dateOfBirth[2] : "0" + dateOfBirth[2],
-                        dateOfBirth[0], dateOfBirth[1])))
-                .shouldHave(text(String.format("Subjects %s", subjects)))
-                .shouldHave(text(String.format("Hobbies %s", hobbies)))
-                .shouldHave(text(String.format("Picture %s", fileName)))
-                .shouldHave(text(String.format("Address %s", address)))
-                .shouldHave(text(String.format("State and City %s %s", state, city)));
+                .shouldHave(text("Student Name Artem L"))
+                .shouldHave(text("Student Email a@mail.com"))
+                .shouldHave(text("Gender Male"))
+                .shouldHave(text("Mobile 8005553535"))
+                .shouldHave(text("Date of Birth 01 January,1900"))
+                .shouldHave(text("Subjects Computer Science"))
+                .shouldHave(text("Hobbies Music"))
+                .shouldHave(text("Picture test.jpg"))
+                .shouldHave(text("Address Russia"))
+                .shouldHave(text("State and City Rajasthan Jaipur"));
     }
 
     @Test
