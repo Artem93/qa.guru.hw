@@ -6,13 +6,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 
 public class GitHubTests {
 
     @BeforeAll
-    static void Precondition() {
+    static void precondition() {
         Configuration.baseUrl = "https://github.com/";
         Configuration.browserSize = "1920x1280";
         Configuration.pageLoadStrategy = "eager";
@@ -25,12 +26,9 @@ public class GitHubTests {
         // Открываем таб
         $("#wiki-tab").click();
 
-        // Раскрываем весь список страниц
-        $(".wiki-more-pages-link button").click();
-
-        // Выбираем нужную и кликаем
-        $$("[data-filterable-for='wiki-pages-filter'] li")
-                .findBy(text("SoftAssertions")).find("a").click();
+        // Ищем страницу через поиск
+        $("#wiki-pages-filter").setValue("SoftAssertions");
+        $("#wiki-pages-box").$(byTagAndText("a", "SoftAssertions")).click();
 
         // Проверяем, что переход произошел
         $(byTagAndText("h1", "SoftAssertions")).shouldBe(visible);
