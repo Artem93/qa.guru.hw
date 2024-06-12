@@ -17,7 +17,7 @@ public class HerokuappTests {
     }
 
     @Test
-    void checkDragAndDrop() {
+    void checkDragAndDropTest() {
         open("drag_and_drop");
         $("#column-a").$(byTagAndText("header", "B")).shouldNotBe(exist);
         $("#column-b").$(byTagAndText("header", "A")).shouldNotBe(exist);
@@ -27,7 +27,7 @@ public class HerokuappTests {
     }
 
     @Test
-    void checkActions() {
+    void checkActionsTest() {
         open("drag_and_drop");
         $("#column-a").$(byTagAndText("header", "B")).shouldNotBe(exist);
         $("#column-b").$(byTagAndText("header", "A")).shouldNotBe(exist);

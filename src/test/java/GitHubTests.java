@@ -19,7 +19,7 @@ public class GitHubTests {
     }
 
     @Test
-    void checkSoftAssertions() {
+    void checkSoftAssertionsTest() {
         open("selenide/selenide");
 
         // Открываем таб
@@ -48,7 +48,7 @@ public class GitHubTests {
     }
 
     @Test
-    void checkPageAiPowered() {
+    void checkPageAiPoweredTest() {
         open("");
         $$(".HeaderMenu-item").find(text(" Solutions ")).hover();
         $(byTagAndText("a", "Enterprise")).click();
