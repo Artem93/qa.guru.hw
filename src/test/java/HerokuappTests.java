@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.DragAndDropOptions.to;
 import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class HerokuappTests {
@@ -23,6 +22,19 @@ public class HerokuappTests {
         $("#column-a").$(byTagAndText("header", "B")).shouldNotBe(exist);
         $("#column-b").$(byTagAndText("header", "A")).shouldNotBe(exist);
         $("#column-a").dragAndDrop(to("#column-b"));
+        $("#column-a").$(byTagAndText("header", "B")).shouldBe(exist);
+        $("#column-b").$(byTagAndText("header", "A")).shouldBe(exist);
+    }
+
+    @Test
+    void checkActions() {
+        open("drag_and_drop");
+        $("#column-a").$(byTagAndText("header", "B")).shouldNotBe(exist);
+        $("#column-b").$(byTagAndText("header", "A")).shouldNotBe(exist);
+
+        actions()
+                .moveToElement($("#column-a")).clickAndHold()
+                .moveToElement($("#column-b")).release().perform();
         $("#column-a").$(byTagAndText("header", "B")).shouldBe(exist);
         $("#column-b").$(byTagAndText("header", "A")).shouldBe(exist);
     }
