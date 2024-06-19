@@ -6,8 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class GitHubTests {
@@ -20,7 +19,7 @@ public class GitHubTests {
     }
 
     @Test
-    void checkSoftAssertions() {
+    void checkSoftAssertionsTest() {
         open("selenide/selenide");
 
         // Открываем таб
@@ -46,5 +45,13 @@ public class GitHubTests {
                         text("$(\"#first\").should(visible).click();"),
                         text("$(\"#second\").should(visible).click();")
                 );
+    }
+
+    @Test
+    void checkPageAiPoweredTest() {
+        open("");
+        $$(".HeaderMenu-item").find(text(" Solutions ")).hover();
+        $(byTagAndText("a", "Enterprise")).click();
+        $(byTagAndText("h1", "The AI-powered")).shouldBe(visible);
     }
 }
