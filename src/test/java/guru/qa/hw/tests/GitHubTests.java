@@ -23,18 +23,10 @@ public class GitHubTests {
     @Test
     void checkSoftAssertionsTest() {
         open("selenide/selenide");
-
-        // Открываем таб
         $("#wiki-tab").click();
-
-        // Ищем страницу через поиск
         $("#wiki-pages-filter").setValue("SoftAssertions");
         $("#wiki-pages-box").$(byTagAndText("a", "SoftAssertions")).click();
-
-        // Проверяем, что переход произошел
         $(byTagAndText("h1", "SoftAssertions")).shouldBe(visible);
-
-        // Проверяем блок с JUnit5
         $(byText("3. Using JUnit5 extend test class:")).scrollTo().shouldBe(visible);
         $(byText("3. Using JUnit5 extend test class:"))
                 .parent().sibling(0).find("pre").shouldHave(

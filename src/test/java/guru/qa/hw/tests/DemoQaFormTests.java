@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class DemoQaFormTests extends DemoQaTestBase {
 
     @Test
-    void checkFillAllFieldsForm() {
+    void checkFillAllFieldsFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
@@ -43,7 +43,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
     }
 
     @Test
-    void checkFillRequirementFieldsForm() {
+    void checkFillRequirementFieldsFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
@@ -63,7 +63,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
     }
 
     @Test
-    void checkEmptyFieldForm() {
+    void checkEmptyFieldFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
@@ -74,7 +74,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
     }
 
     @Test
-    void checkInvalidPhoneForm() {
+    void checkInvalidPhoneFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
@@ -90,7 +90,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
     }
 
     @Test
-    void checkInvalidEmailForm() {
+    void checkInvalidEmailFormTest() {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
