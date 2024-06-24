@@ -34,12 +34,6 @@ public class PracticeFormPage {
 
     private final SelenideElement submitButton = form.$("#submit");
 
-    public enum Gender {
-        Male,
-        Female,
-        Other
-    }
-
     public void openPage() {
         open("/automation-practice-form");
         header.shouldHave(text("Practice Form"));
@@ -60,8 +54,8 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage setGender(Gender gender) {
-        formGender.$(byText(gender.toString())).click();
+    public PracticeFormPage setGender(String gender) {
+        formGender.$(byText(gender)).click();
         return this;
     }
 
