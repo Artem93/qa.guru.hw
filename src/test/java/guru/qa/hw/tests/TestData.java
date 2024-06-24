@@ -16,7 +16,6 @@ public class TestData {
     Birthday birthday = generateBirthday();
     String subject = generateSubject();
     String hobbies = generateHobbies();
-    String filePath = "src/test/resources/test.jpg";
     String fileName = "test.jpg";
     String address = instance().address().fullAddress();
     String state = selectState.state;

@@ -14,7 +14,19 @@ public class DemoQaFormTests extends DemoQaTestBase {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
         practiceFormPage.openPage();
 
-        practiceFormPage.setFirstName(td.firstName).setLastName(td.lastName).setEmail(td.email).setGender(td.gender).setNumber(td.number).setBirthday(td.birthday.year, td.birthday.month, td.birthday.day).setSubject(td.subject).setHobbies(td.hobbies).uploadFile(td.filePath).setAddress(td.address).selectState(td.state).selectCity(td.city)
+        practiceFormPage
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setEmail(td.email)
+                .setGender(td.gender)
+                .setNumber(td.number)
+                .setBirthday(td.birthday.year, td.birthday.month, td.birthday.day)
+                .setSubject(td.subject)
+                .setHobbies(td.hobbies)
+                .uploadFile(td.fileName)
+                .setAddress(td.address)
+                .selectState(td.state)
+                .selectCity(td.city)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
@@ -28,12 +40,19 @@ public class DemoQaFormTests extends DemoQaTestBase {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
-        practiceFormPage.setFirstName(td.firstName).setLastName(td.lastName).setGender(td.gender).setNumber(td.number)
+        practiceFormPage
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setGender(td.gender)
+                .setNumber(td.number)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
         modalWindowPage
-                .checkHeader().checkTableValue(constName, String.format("%s %s", td.firstName, td.lastName)).checkTableValue(constGender, td.gender).checkTableValue(constMobile, td.number);
+                .checkHeader()
+                .checkTableValue(constName, String.format("%s %s", td.firstName, td.lastName))
+                .checkTableValue(constGender, td.gender)
+                .checkTableValue(constMobile, td.number);
     }
 
     @Test
@@ -53,7 +72,11 @@ public class DemoQaFormTests extends DemoQaTestBase {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
-        practiceFormPage.setFirstName(td.firstName).setLastName(td.lastName).setGender(td.gender).setNumber(td.invalidNumber)
+        practiceFormPage
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setGender(td.gender)
+                .setNumber(td.invalidNumber)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
@@ -66,7 +89,12 @@ public class DemoQaFormTests extends DemoQaTestBase {
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
-        practiceFormPage.setFirstName(td.firstName).setLastName(td.lastName).setEmail(td.invalidEmail).setGender(td.gender).setNumber(td.number)
+        practiceFormPage
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setEmail(td.invalidEmail)
+                .setGender(td.gender)
+                .setNumber(td.number)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();

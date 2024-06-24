@@ -1,35 +1,12 @@
 package guru.qa.hw.utils;
 
+import com.github.javafaker.Faker;
+
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 
 public class GenerateTestData {
-
-    private enum Months {
-        JANUARY("January", 31),
-        FEBRUARY("February", 28),
-        MARCH("March", 31),
-        APRIL("April", 30),
-        MAY("May", 31),
-        JUNE("June", 30),
-        JULY("July", 31),
-        AUGUST("August", 31),
-        SEPTEMBER("September", 30),
-        OCTOBER("October", 31),
-        NOVEMBER("November", 30),
-        DECEMBER("December", 31);
-
-        private final String month;
-        private final Integer maxDays;
-
-        Months(String month, int maxDays) {
-            this.month = month;
-            this.maxDays = maxDays;
-        }
-
-        public static Months getRandomMonth() {
-            return values()[new Random().nextInt(12)];
-        }
-    }
 
     public enum States {
         NCR("NCR", new String[]{"Delhi", "Gurgaon", "Noida"}),
@@ -61,14 +38,15 @@ public class GenerateTestData {
     }
 
     public static Birthday generateBirthday() {
-        var minYear = 1900;
-        var maxYear = 2024;
+        var birthday = Faker.instance().date().birthday(0, 100);
+        var calendar = Calendar.getInstance();
+        calendar.setTime(birthday);
 
-        int year = new Random().nextInt(maxYear - minYear) + minYear;
-        Months month = Months.getRandomMonth();
-        int day = new Random().nextInt(month.maxDays);
+        var year = calendar.get(Calendar.YEAR);
+        var month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
+        var day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return new Birthday(year, month.month, day);
+        return new Birthday(year, month, day);
     }
 
     public static String generateGender() {
