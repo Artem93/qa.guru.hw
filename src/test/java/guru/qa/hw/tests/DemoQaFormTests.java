@@ -4,62 +4,55 @@ import guru.qa.hw.pages.ModalWindowPage;
 import guru.qa.hw.pages.PracticeFormPage;
 import org.junit.jupiter.api.Test;
 
+import static guru.qa.hw.pages.ModalWindowPage.*;
+
 public class DemoQaFormTests extends DemoQaTestBase {
 
     @Test
     void checkFillAllFieldsFormTest() {
+        TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
-
         practiceFormPage.openPage();
 
         practiceFormPage
-                .setFirstName("Artem")
-                .setLastName("L")
-                .setEmail("a@mail.com")
-                .setGender(PracticeFormPage.Gender.Male)
-                .setNumber("8005553535")
-                .setBirthday("1900", "January", "1")
-                .setSubject("Computer Science")
-                .setHobbies("Music")
-                .uploadFile("src/test/resources/test.jpg")
-                .setAddress("Russia")
-                .selectState("Rajasthan")
-                .selectCity("Jaipur")
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setEmail(td.email)
+                .setGender(td.gender)
+                .setNumber(td.number)
+                .setBirthday(td.birthday.year, td.birthday.month, td.birthday.day)
+                .setSubject(td.subject)
+                .setHobbies(td.hobbies)
+                .uploadFile(td.fileName)
+                .setAddress(td.address)
+                .selectState(td.state)
+                .selectCity(td.city)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
         modalWindowPage
-                .checkHeader()
-                .checkTableValue("Student Name", "Artem L")
-                .checkTableValue("Student Email", "a@mail.com")
-                .checkTableValue("Gender", "Male")
-                .checkTableValue("Mobile", "8005553535")
-                .checkTableValue("Date of Birth", "01 January,1900")
-                .checkTableValue("Subjects", "Computer Science")
-                .checkTableValue("Hobbies", "Music")
-                .checkTableValue("Picture", "test.jpg")
-                .checkTableValue("Address", "Russia")
-                .checkTableValue("State and City", "Rajasthan Jaipur");
+                .checkHeader().checkTableValue(constName, String.format("%s %s", td.firstName, td.lastName)).checkTableValue(constEmail, td.email).checkTableValue(constGender, td.gender).checkTableValue(constMobile, td.number).checkTableValue(constBirthday, String.format("%s %s,%s", td.birthday.dayWithZero, td.birthday.month, td.birthday.year)).checkTableValue(constSubject, td.subject).checkTableValue(constHobbies, td.hobbies).checkTableValue(constPicture, td.fileName).checkTableValue(constAddress, td.address).checkTableValue(constStateCity, String.format("%s %s", td.state, td.city));
     }
 
     @Test
     void checkFillRequirementFieldsFormTest() {
+        TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
         practiceFormPage
-                .setFirstName("Artem")
-                .setLastName("L")
-                .setGender(PracticeFormPage.Gender.Male)
-                .setNumber("8005553535")
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setGender(td.gender)
+                .setNumber(td.number)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
         modalWindowPage
                 .checkHeader()
-                .checkTableValue("Student Name", "Artem L")
-                .checkTableValue("Gender", "Male")
-                .checkTableValue("Mobile", "8005553535");
+                .checkTableValue(constName, String.format("%s %s", td.firstName, td.lastName))
+                .checkTableValue(constGender, td.gender)
+                .checkTableValue(constMobile, td.number);
     }
 
     @Test
@@ -75,14 +68,15 @@ public class DemoQaFormTests extends DemoQaTestBase {
 
     @Test
     void checkInvalidPhoneFormTest() {
+        TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
         practiceFormPage
-                .setFirstName("Artem")
-                .setLastName("L")
-                .setGender(PracticeFormPage.Gender.Male)
-                .setNumber("800555353d")
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setGender(td.gender)
+                .setNumber(td.invalidNumber)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();
@@ -91,15 +85,16 @@ public class DemoQaFormTests extends DemoQaTestBase {
 
     @Test
     void checkInvalidEmailFormTest() {
+        TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
 
         practiceFormPage.openPage();
         practiceFormPage
-                .setFirstName("Artem")
-                .setLastName("L")
-                .setEmail("aaa")
-                .setGender(PracticeFormPage.Gender.Male)
-                .setNumber("800555353")
+                .setFirstName(td.firstName)
+                .setLastName(td.lastName)
+                .setEmail(td.invalidEmail)
+                .setGender(td.gender)
+                .setNumber(td.number)
                 .submitForm();
 
         ModalWindowPage modalWindowPage = new ModalWindowPage();

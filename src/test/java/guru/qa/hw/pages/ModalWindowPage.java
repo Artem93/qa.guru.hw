@@ -7,6 +7,16 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ModalWindowPage {
+    public static final String constName = "Student Name";
+    public static final String constEmail = "Student Email";
+    public static final String constGender = "Gender";
+    public static final String constMobile = "Mobile";
+    public static final String constBirthday = "Date of Birth";
+    public static final String constSubject = "Subjects";
+    public static final String constHobbies = "Hobbies";
+    public static final String constPicture = "Picture";
+    public static final String constAddress = "Address";
+    public static final String constStateCity = "State and City";
 
     private final SelenideElement modalWindow = $(".modal-dialog");
     private final SelenideElement modalWindowHeader = modalWindow.$("#example-modal-sizes-title-lg");
