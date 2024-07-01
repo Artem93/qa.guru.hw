@@ -15,11 +15,11 @@ public class GenerateTestData {
         RAJASTHAN("Rajasthan", new String[]{"Jaipur", "Jaiselmer"});
 
         public final String state;
-        private final String[] city;
+        public final String[] cities;
 
         States(String state, String[] city) {
             this.state = state;
-            this.city = city;
+            this.cities = city;
         }
     }
 
@@ -69,6 +69,6 @@ public class GenerateTestData {
     }
 
     public static String generateCity(States state) {
-        return state.city[new Random().nextInt(0, state.city.length)];
+        return state.cities[new Random().nextInt(0, state.cities.length)];
     }
 }
