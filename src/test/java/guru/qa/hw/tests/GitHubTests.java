@@ -1,51 +1,59 @@
 package guru.qa.hw.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import guru.qa.hw.pages.GitHubPage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static guru.qa.hw.pages.GitHubPage.*;
 
 
-public class GitHubTests {
-
-    @BeforeAll
-    static void precondition() {
-        Configuration.baseUrl = "https://github.com/";
-        Configuration.browserSize = "1920x1280";
-        Configuration.pageLoadStrategy = "eager";
-    }
+public class GitHubTests extends GitHubBaseTest {
 
     @Test
-    void checkSoftAssertionsTest() {
+    @DisplayName("Проверка блока с кодом на странице SoftAssertions")
+    void checkCodeInSoftAssertionsPageTest() {
         open("selenide/selenide");
-        $("#wiki-tab").click();
-        $("#wiki-pages-filter").setValue("SoftAssertions");
-        $("#wiki-pages-box").$(byTagAndText("a", "SoftAssertions")).click();
-        $(byTagAndText("h1", "SoftAssertions")).shouldBe(visible);
-        $(byText("3. Using JUnit5 extend test class:")).scrollTo().shouldBe(visible);
-        $(byText("3. Using JUnit5 extend test class:"))
-                .parent().sibling(0).find("pre").shouldHave(
-                        text("@ExtendWith({SoftAssertsExtension.class})"),
-                        text("class Tests {"),
-                        text("@Test"),
-                        text("void test() {"),
-                        text("Configuration.assertionMode = SOFT;"),
-                        text("open(\"page.html\");"),
-                        text("$(\"#first\").should(visible).click();"),
-                        text("$(\"#second\").should(visible).click();")
-                );
+        GitHubPage gitHubPage = new GitHubPage();
+        gitHubPage
+                .wikiTabClick()
+                .setWikiPagesFilterClick(softAssertionsConst)
+                .findPageInSearchResultsAndClick(softAssertionsConst)
+                .checkHeader(softAssertionsConst)
+                .checkTextInLibPage(softAssertionsCodeHeaderConst)
+                .checkChildrenTextForTextInLibPage(softAssertionsCodeHeaderConst, softAssertionsCodeConst);
     }
 
+
+    @CsvSource(
+            value = {
+                    "SoftAssertions, 3. Using JUnit5 extend test class:",
+                    "Safari, Way 2: WebDriverProvider"
+            }
+    )
+    @ParameterizedTest
+    @DisplayName("Проверка блока с текстом на странице {0}")
+    void checkTextInPageTest(String page, String text) {
+        open("selenide/selenide");
+        GitHubPage gitHubPage = new GitHubPage();
+        gitHubPage
+                .wikiTabClick()
+                .setWikiPagesFilterClick(page)
+                .findPageInSearchResultsAndClick(page)
+                .checkHeader(page)
+                .checkTextInLibPage(text);
+    }
+
+    @DisplayName("Проверка перехода на страницу AI через хедер меню github")
     @Test
     void checkPageAiPoweredTest() {
         open("");
-        $$(".HeaderMenu-item").find(text(" Solutions ")).hover();
-        $(byTagAndText("a", "Enterprise")).click();
-        $(byTagAndText("h1", "The AI-powered")).shouldBe(visible);
+        GitHubPage gitHubPage = new GitHubPage();
+        gitHubPage
+                .hoverOnGitHubMenu(solutionsConst)
+                .clickByLink(enterpriseConst)
+                .checkHeader(aiPoweredConst);
     }
 }
