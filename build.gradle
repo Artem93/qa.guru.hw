@@ -13,7 +13,13 @@ dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:5.10.2",
             "com.codeborne:selenide:7.3.1",
-            "com.github.javafaker:javafaker:1.0.2"
+            "com.github.javafaker:javafaker:1.0.2",
+            group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.1',
+            "com.codeborne:pdf-test:1.8.1",
+            "com.codeborne:xls-test:1.4.3",
+            'com.opencsv:opencsv:5.9',
+            'com.fasterxml.jackson.core:jackson-core:2.13.1',
+            'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     )
 }
 
