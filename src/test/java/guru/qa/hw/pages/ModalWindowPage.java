@@ -1,6 +1,7 @@
 package guru.qa.hw.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,6 +23,7 @@ public class ModalWindowPage {
     private final SelenideElement modalWindowHeader = modalWindow.$("#example-modal-sizes-title-lg");
     private final SelenideElement modalWindowTable = modalWindow.$(".table-responsive");
 
+    @Step("Проверка хедер")
     public ModalWindowPage checkHeader() {
         modalWindowHeader
                 .shouldBe(visible)
@@ -29,6 +31,7 @@ public class ModalWindowPage {
         return this;
     }
 
+    @Step("Проверка значение: {0} - {1}")
     public ModalWindowPage checkTableValue(String key, String value) {
         modalWindowTable
                 .$(byText(key))
@@ -37,6 +40,7 @@ public class ModalWindowPage {
         return this;
     }
 
+    @Step("Проверка отсутствия модального окна")
     public void notExist() {
         modalWindow.shouldNotBe(exist);
     }
