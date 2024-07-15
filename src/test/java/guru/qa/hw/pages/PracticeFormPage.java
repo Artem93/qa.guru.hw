@@ -37,7 +37,7 @@ public class PracticeFormPage {
 
     private void removeBanner() {
         executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('#Ad.Plus-970x250-1').remove()");
+        executeJavaScript("document.getElementById('Ad.Plus-970x250-1').remove()");
         executeJavaScript("$('footer').remove()");
     }
 
