@@ -94,8 +94,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
 
     @Tag("regression")
     @MethodSource()
-    @DisplayName("Проверка заполнения штата: {0} и города {1} и отображения этих данных в модальном окне")
-    @ParameterizedTest
+    @ParameterizedTest(name = "Проверка заполнения штата: {0} и города {1} и отображения этих данных в модальном окне")
     void checkFillStatesAndCitiesFieldsFormTest(String state, String city) {
         TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -173,8 +172,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
 
     @Tag("regression")
     @ValueSource(strings = {"0000000000", "9999999999"})
-    @DisplayName("Проверка данных в модальном окне при номера: {0}")
-    @ParameterizedTest
+    @ParameterizedTest(name = "Проверка данных в модальном окне при номере: {0} ")
     void checkCorrectPhoneFormTest(String phone) {
         TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();

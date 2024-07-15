@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -16,7 +17,8 @@ public class PracticeFormPage {
     private final SelenideElement formEmail = form.$("#userEmail-wrapper").$("#userEmail");
     private final SelenideElement formGender = form.$("#genterWrapper");
     private final SelenideElement formNumber = form.$("#userNumber-wrapper").$("#userNumber");
-    private final SelenideElement dateWrapper = form.$("#dateOfBirth-wrapper");
+    private final SelenideElement datePicker = form.$(".react-datepicker");
+    private final SelenideElement dateOfBirthInput = form.$("#dateOfBirthInput");
     private final SelenideElement formSubject = form.$("#subjectsWrapper").$("#subjectsInput");
     private final SelenideElement formHobbies = form.$("#hobbiesWrapper");
     private final SelenideElement formUploadFile = form.$("#uploadPicture");
@@ -35,6 +37,7 @@ public class PracticeFormPage {
 
     private void removeBanner() {
         executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('#Ad.Plus-970x250-1').remove()");
         executeJavaScript("$('footer').remove()");
     }
 
@@ -70,7 +73,8 @@ public class PracticeFormPage {
 
     @Step("Задать др: {0} {1} {2}")
     public PracticeFormPage setBirthday(String year, String month, String day) {
-        dateWrapper.click();
+        dateOfBirthInput.click();
+        datePicker.shouldBe(visible);
         new CalendarWidgetPage().setBirthday(year, month, day);
         return this;
     }

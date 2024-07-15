@@ -10,6 +10,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 public class DemoQaTestBase {
     @BeforeAll
     static void setUp() {
@@ -26,7 +28,6 @@ public class DemoQaTestBase {
         Configuration.browserSize = System.getProperty(
                 "resolution",
                 "1920x1280");
-        Configuration.pageLoadStrategy = "eager";
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -35,7 +36,6 @@ public class DemoQaTestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-
     }
 
     @AfterEach
@@ -43,5 +43,6 @@ public class DemoQaTestBase {
         Attachments.attachPage();
         Attachments.attachScreenshot();
         Attachments.addVideo();
+        closeWebDriver();
     }
 }
