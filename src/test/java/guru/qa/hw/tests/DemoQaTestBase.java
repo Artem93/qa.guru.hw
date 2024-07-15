@@ -20,7 +20,7 @@ public class DemoQaTestBase {
         Configuration.browser = System.getProperty(
                 "browser",
                 "chrome");
-        Configuration.browserVersion = Configuration.browser = System.getProperty(
+        Configuration.browserVersion = System.getProperty(
                 "browserVersion",
                 "120");
         Configuration.browserSize = System.getProperty(
