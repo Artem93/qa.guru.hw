@@ -6,6 +6,7 @@ import guru.qa.hw.helpers.Attachments;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -15,20 +16,17 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class DemoQaTestBase {
     @BeforeAll
     static void setUp() {
+        var browser = ":".split(System.getProperty("browser", "chrome:100.0"))[0];
+        var version = ":".split(System.getProperty("browser", "chrome:100.0"))[1];
         Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = browser;
+        Configuration.browserVersion = version;
         Configuration.remote = System.getProperty(
                 "remoteUrl",
                 "https://user1:1234@selenoid.autotests.cloud/wd/hub");
-        Configuration.browser = System.getProperty(
-                "browser",
-                "chrome");
-        Configuration.browserVersion = System.getProperty(
-                "browserVersion",
-                "120");
         Configuration.browserSize = System.getProperty(
                 "resolution",
                 "1920x1280");
-        SelenideLogger.addListener("allure", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -36,6 +34,11 @@ public class DemoQaTestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
+    }
+
+    @BeforeEach
+    void setTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach
