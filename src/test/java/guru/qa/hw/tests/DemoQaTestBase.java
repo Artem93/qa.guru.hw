@@ -16,8 +16,8 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class DemoQaTestBase {
     @BeforeAll
     static void setUp() {
-        var browser = ":".split(System.getProperty("browser", "chrome:100.0"))[0];
-        var version = ":".split(System.getProperty("browser", "chrome:100.0"))[1];
+        var browser = System.getProperty("browser", "chrome:100.0").split(":")[0];
+        var version = System.getProperty("browser", "chrome:100.0").split(":")[1];
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = browser;
         Configuration.browserVersion = version;
