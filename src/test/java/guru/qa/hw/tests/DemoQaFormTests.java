@@ -4,6 +4,8 @@ import guru.qa.hw.pages.ModalWindowPage;
 import guru.qa.hw.pages.PracticeFormPage;
 import guru.qa.hw.utils.GenerateTestData.States;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,6 +19,10 @@ import static guru.qa.hw.pages.ModalWindowPage.*;
 
 public class DemoQaFormTests extends DemoQaTestBase {
 
+    @Tags({
+            @Tag("regression"),
+            @Tag("smoke")
+    })
     @DisplayName("Проверка заполнения всех полей и отображения этих данных в модальном окне")
     @Test
     void checkFillAllFieldsFormTest() {
@@ -54,6 +60,10 @@ public class DemoQaFormTests extends DemoQaTestBase {
                 .checkTableValue(constStateCity, String.format("%s %s", td.state, td.city));
     }
 
+    @Tags({
+            @Tag("regression"),
+            @Tag("smoke")
+    })
     @DisplayName("Проверка заполнения только требуемых полей и отображения этих данных в модальном окне")
     @Test
     void checkFillRequirementFieldsFormTest() {
@@ -82,9 +92,9 @@ public class DemoQaFormTests extends DemoQaTestBase {
                         .map(city -> Arguments.of(state.state, city)));
     }
 
+    @Tag("regression")
     @MethodSource()
-    @DisplayName("Проверка заполнения штата: {0} и города {1} и отображения этих данных в модальном окне")
-    @ParameterizedTest
+    @ParameterizedTest(name = "Проверка заполнения штата: {0} и города {1} и отображения этих данных в модальном окне")
     void checkFillStatesAndCitiesFieldsFormTest(String state, String city) {
         TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -108,6 +118,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
                 .checkTableValue(constMobile, td.number);
     }
 
+    @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при незаполненных полях")
     @Test
     void checkEmptyFieldFormTest() {
@@ -120,6 +131,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при некорректном номере")
     @Test
     void checkInvalidPhoneFormTest() {
@@ -138,6 +150,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при некорректной почте")
     @Test
     void checkInvalidEmailFormTest() {
@@ -157,9 +170,9 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @Tag("regression")
     @ValueSource(strings = {"0000000000", "9999999999"})
-    @DisplayName("Проверка данных в модальном окне при номера: {0}")
-    @ParameterizedTest
+    @ParameterizedTest(name = "Проверка данных в модальном окне при номере: {0} ")
     void checkCorrectPhoneFormTest(String phone) {
         TestData td = new TestData();
         PracticeFormPage practiceFormPage = new PracticeFormPage();

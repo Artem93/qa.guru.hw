@@ -1,5 +1,6 @@
 plugins {
-    id 'java'
+    id "java"
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 group = 'guru.qa'
@@ -9,9 +10,26 @@ repositories {
     mavenCentral()
 }
 
+def allureVersion = '2.28.0'
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:5.10.2",
+            "io.qameta.allure:allure-selenide:2.28.0",
             "com.codeborne:selenide:7.3.1",
             "com.github.javafaker:javafaker:1.0.2",
             group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.1',
@@ -21,8 +39,13 @@ dependencies {
             'com.fasterxml.jackson.core:jackson-core:2.13.1',
             'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     )
+
+
 }
 
-test {
-    useJUnitPlatform()
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform({
+        includeTags(System.getProperty("type", "regression"))
+    })
 }
