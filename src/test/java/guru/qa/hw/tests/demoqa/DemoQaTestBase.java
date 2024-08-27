@@ -1,4 +1,4 @@
-package guru.qa.hw.tests;
+package guru.qa.hw.tests.demoqa;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;

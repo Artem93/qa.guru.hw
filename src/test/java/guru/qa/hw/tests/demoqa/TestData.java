@@ -1,4 +1,4 @@
-package guru.qa.hw.tests;
+package guru.qa.hw.tests.demoqa;
 
 import static com.github.javafaker.Faker.instance;
 import static guru.qa.hw.utils.GenerateTestData.*;

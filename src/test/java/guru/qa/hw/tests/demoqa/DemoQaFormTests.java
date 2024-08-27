@@ -1,4 +1,4 @@
-package guru.qa.hw.tests;
+package guru.qa.hw.tests.demoqa;
 
 import guru.qa.hw.pages.ModalWindowPage;
 import guru.qa.hw.pages.PracticeFormPage;
