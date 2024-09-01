@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id 'io.qameta.allure' version '2.11.2'
+    id 'io.freefair.lombok' version "8.6"
 }
 
 group = 'guru.qa'
@@ -48,7 +49,14 @@ dependencies {
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
+
+    def testName = System.getProperty("testName")
+    def tag = System.getProperty("type", "regression")
     useJUnitPlatform({
-        includeTags(System.getProperty("type", "regression"))
+        if (testName) {
+            include(testName)
+        } else {
+            includeTags(System.getProperty("type", "regression"))
+        }
     })
 }

@@ -6,6 +6,7 @@ import static guru.qa.hw.utils.GenerateTestData.*;
 public class TestData {
     private final States selectState = generateState();
 
+    Birthday birthday = generateBirthday();
     String firstName = instance().name().firstName();
     String lastName = instance().name().lastName();
     String email = instance().internet().emailAddress();
@@ -13,11 +14,14 @@ public class TestData {
     String gender = generateGender();
     String number = instance().phoneNumber().subscriberNumber(10);
     String invalidNumber = instance().phoneNumber().subscriberNumber(4);
-    Birthday birthday = generateBirthday();
     String subject = generateSubject();
     String hobbies = generateHobbies();
     String fileName = "test.jpg";
     String address = instance().address().fullAddress();
     String state = selectState.state;
     String city = generateCity(selectState);
+
+    public static String userName = "UserName";
+    public static String userPassword = "Password!1";
+    public static String testIsbn = "9781593275846";
 }
