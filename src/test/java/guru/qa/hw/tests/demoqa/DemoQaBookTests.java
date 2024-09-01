@@ -20,16 +20,15 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
 public class DemoQaBookTests extends DemoQaTestBase {
-    ProfilePage profilePage = new ProfilePage();
-
-    @Test
     @Tags({
             @Tag("regression"),
             @Tag("smoke")
     })
     @DisplayName("Удаление книги из списка в профиле")
     @WithLogin
+    @Test
     void removeBookByUITest() {
+        ProfilePage profilePage = new ProfilePage();
         BookAddRequestModel bookAddRequestModel = new BookAddRequestModel();
         IsbmModel book = new IsbmModel();
         book.setIsbn(testIsbn);
