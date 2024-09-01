@@ -27,7 +27,7 @@ public class DemoQaBookTests extends DemoQaTestBase {
             @Tag("regression"),
             @Tag("smoke")
     })
-    @DisplayName("")
+    @DisplayName("Удаление книги из списка в профиле")
     @WithLogin
     void removeBookByUITest() {
         BookAddRequestModel bookAddRequestModel = new BookAddRequestModel();
