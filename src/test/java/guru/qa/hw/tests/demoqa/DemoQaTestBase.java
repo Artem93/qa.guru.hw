@@ -22,9 +22,7 @@ public class DemoQaTestBase {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser", "chrome:100.0").split(":")[0];
         Configuration.browserVersion = System.getProperty("browser", "chrome:100.0").split(":")[1];
-        Configuration.remote = System.getProperty(
-                "remoteUrl",
-                "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        Configuration.remote = System.getProperty("remoteUrl");
         Configuration.browserSize = System.getProperty(
                 "resolution",
                 "1920x1280");
@@ -43,7 +41,7 @@ public class DemoQaTestBase {
     }
 
     @AfterEach
-    void post() {
+    void finishTest() {
         Attachments.attachPage();
         Attachments.attachScreenshot();
         Attachments.addVideo();

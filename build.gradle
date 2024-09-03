@@ -50,13 +50,7 @@ dependencies {
 tasks.withType(Test) {
     systemProperties(System.getProperties())
 
-    def testName = System.getProperty("testName")
-    def tag = System.getProperty("type", "regression")
     useJUnitPlatform({
-        if (testName) {
-            include(testName)
-        } else {
-            includeTags(System.getProperty("type", "regression"))
-        }
+        includeTags(System.getProperty("type", "regression"))
     })
 }
