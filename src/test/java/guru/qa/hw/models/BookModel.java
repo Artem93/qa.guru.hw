@@ -5,8 +5,9 @@ import lombok.Data;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-public class AuthResponseModel {
-    private String userId;
-    private String expires;
-    private String token;
+public class BookModel {
+    private String isbn;
+    private String title;
+    private String author;
+    private String publisher;
 }

@@ -48,7 +48,7 @@ public class DemoQaTestBase {
     }
 
     @AfterEach
-    void post() {
+    void finishTest() {
         Attachments.attachPage();
         Attachments.attachScreenshot();
         Attachments.addVideo();
