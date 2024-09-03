@@ -21,8 +21,7 @@ import static io.restassured.RestAssured.given;
 
 public class DemoQaBookTests extends DemoQaTestBase {
     @Tags({
-            @Tag("regression"),
-            @Tag("smoke")
+            @Tag("regression")
     })
     @DisplayName("Удаление книги из списка в профиле")
     @WithLogin

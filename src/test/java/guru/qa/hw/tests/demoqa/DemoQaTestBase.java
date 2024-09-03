@@ -2,6 +2,7 @@ package guru.qa.hw.tests.demoqa;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import guru.qa.hw.config.ConfigDriver;
 import guru.qa.hw.helpers.Attachments;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
@@ -20,14 +21,18 @@ public class DemoQaTestBase {
         RestAssured.baseURI = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browser = System.getProperty("browser", "chrome:100.0").split(":")[0];
-        Configuration.browserVersion = System.getProperty("browser", "chrome:100.0").split(":")[1];
-        Configuration.remote = System.getProperty(
-                "remoteUrl",
-                "https://user1:1234@selenoid.autotests.cloud/wd/hub");
-        Configuration.browserSize = System.getProperty(
-                "resolution",
-                "1920x1280");
+
+        var config = new ConfigDriver().getTestConfig();
+
+        if (config.getIsRemote()) {
+            Configuration.browser = config.getBrowser().split(":")[0];
+            Configuration.browserVersion = config.getBrowser().split(":")[1];
+            Configuration.remote = config.getRemoteUrl();
+        } else {
+            Configuration.browser = config.getBrowserName();
+            Configuration.browserVersion = config.getBrowserVersion();
+        }
+        Configuration.browserSize = config.getBrowserSize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
