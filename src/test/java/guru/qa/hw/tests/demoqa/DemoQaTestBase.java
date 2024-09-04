@@ -27,11 +27,11 @@ public class DemoQaTestBase {
         if (config.getIsRemote()) {
             Configuration.browser = config.getBrowser().split(":")[0];
             Configuration.browserVersion = config.getBrowser().split(":")[1];
-            Configuration.remote = config.getRemoteUrl();
         } else {
             Configuration.browser = config.getBrowserName();
             Configuration.browserVersion = config.getBrowserVersion();
         }
+        Configuration.remote = config.getRemoteUrl();
         Configuration.browserSize = config.getBrowserSize();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -48,7 +48,7 @@ public class DemoQaTestBase {
     }
 
     @AfterEach
-    void finishTest() {
+    void post() {
         Attachments.attachPage();
         Attachments.attachScreenshot();
         Attachments.addVideo();
