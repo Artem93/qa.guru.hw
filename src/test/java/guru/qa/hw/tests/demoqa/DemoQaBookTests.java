@@ -3,6 +3,7 @@ package guru.qa.hw.tests.demoqa;
 import guru.qa.hw.helpers.WithLogin;
 import guru.qa.hw.pages.ProfilePage;
 import guru.qa.hw.steps.BooksApiSteps;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -12,6 +13,7 @@ import static guru.qa.hw.tests.demoqa.TestData.testIsbn;
 
 @Feature("User profile")
 public class DemoQaBookTests extends DemoQaTestBase {
+    @AllureId("34430")
     @Tag("regression")
     @DisplayName("Удаление книги из списка в профиле")
     @WithLogin

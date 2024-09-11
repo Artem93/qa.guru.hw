@@ -3,6 +3,7 @@ package guru.qa.hw.tests.demoqa;
 import guru.qa.hw.pages.ModalWindowPage;
 import guru.qa.hw.pages.PracticeFormPage;
 import guru.qa.hw.utils.GenerateTestData.States;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -21,6 +22,7 @@ import static guru.qa.hw.pages.ModalWindowPage.*;
 @Feature("User form")
 public class DemoQaFormTests extends DemoQaTestBase {
 
+    @AllureId("34424")
     @Tags({
             @Tag("regression"),
             @Tag("smoke")
@@ -62,6 +64,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
                 .checkTableValue(constStateCity, String.format("%s %s", td.state, td.city));
     }
 
+    @AllureId("34427")
     @Tags({
             @Tag("regression"),
             @Tag("smoke")
@@ -94,6 +97,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
                         .map(city -> Arguments.of(state.state, city)));
     }
 
+    @AllureId("34423")
     @Tag("regression")
     @MethodSource()
     @ParameterizedTest(name = "Проверка заполнения штата: {0} и города {1} и отображения этих данных в модальном окне")
@@ -120,6 +124,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
                 .checkTableValue(constMobile, td.number);
     }
 
+    @AllureId("34426")
     @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при незаполненных полях")
     @Test
@@ -133,6 +138,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @AllureId("34429")
     @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при некорректном номере")
     @Test
@@ -152,6 +158,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @AllureId("34426")
     @Tag("regression")
     @DisplayName("Проверка, что модальное окно не отображается при некорректной почте")
     @Test
@@ -172,6 +179,7 @@ public class DemoQaFormTests extends DemoQaTestBase {
         modalWindowPage.notExist();
     }
 
+    @AllureId("34428")
     @Tag("regression")
     @ValueSource(strings = {"0000000000", "9999999999"})
     @ParameterizedTest(name = "Проверка данных в модальном окне при номере: {0} ")
