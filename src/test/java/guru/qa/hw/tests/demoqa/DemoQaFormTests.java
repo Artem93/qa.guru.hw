@@ -3,6 +3,7 @@ package guru.qa.hw.tests.demoqa;
 import guru.qa.hw.pages.ModalWindowPage;
 import guru.qa.hw.pages.PracticeFormPage;
 import guru.qa.hw.utils.GenerateTestData.States;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
 
 import static guru.qa.hw.pages.ModalWindowPage.*;
 
+@Feature("User form")
 public class DemoQaFormTests extends DemoQaTestBase {
 
     @Tags({
