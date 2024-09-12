@@ -53,4 +53,7 @@ tasks.withType(Test) {
     useJUnitPlatform({
         includeTags(System.getProperty("type", "regression"))
     })
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
 }
